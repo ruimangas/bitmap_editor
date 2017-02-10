@@ -70,9 +70,15 @@ X - Terminate the session"
   end
 
   def find_method(type)
-    keys.select do |cmds|
-      cmds.first == type
-    end.first.join(' ').to_sym
+    if key_exists?(type)
+      keys.select do |cmds|
+        cmds.first == type
+      end.first.join(' ').to_sym
+    end
+  end
+
+  def key_exists?(key)
+    keys.map(&:first).include?(type)
   end
 
   def keys
