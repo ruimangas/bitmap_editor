@@ -19,7 +19,7 @@ class Bitmap
     end
   end
 
-  def colorize(x, y, color)
+  def paint_pixel(x, y, color)
     pixel = Pixel.new(x, y)
     paint(pixel, color)
   end

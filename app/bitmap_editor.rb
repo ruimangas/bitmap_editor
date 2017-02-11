@@ -14,11 +14,11 @@ class BitmapEditor
   private
 
   def parse(input)
-    type, *args = input.split
-    m = find_method(type)
-    if commands_mapping.key?(m)
-      method = commands_mapping.fetch(m)
-      send(method, *args)
+    cmd, *params = input.split
+    m = find_method(cmd)
+    if cmds_mapping.key?(m)
+      method = cmds_mapping.fetch(m)
+      send(method, *params)
     else
       puts 'unrecognised command :('
     end
@@ -29,7 +29,7 @@ class BitmapEditor
   end
 
   def draw_pixel(x, y, c)
-    @bitmap.colorize(x.to_i, y.to_i, c)
+    @bitmap.paint_pixel(x.to_i, y.to_i, c)
   end
 
   def draw_vertical(x, y1, y2, c)
@@ -44,7 +44,7 @@ class BitmapEditor
     @bitmap.print
   end
 
-  def clear_table
+  def clear_bitmap
     @bitmap.clear_image
   end
 
@@ -64,32 +64,32 @@ S - Show the contents of the current image
 X - Terminate the session"
   end
 
-  def commands_mapping
+  def cmds_mapping
     {
       'I M N': 'create_bitmap' ,
       'L X Y C': 'draw_pixel',
       'V X Y1 Y2 C': 'draw_vertical',
       'H X1 X2 Y C': 'draw_horizontal',
-      'C': 'clear_table',
+      'C': 'clear_bitmap',
       'S': 'print_bitmat',
       'X': 'exit_console',
       '?': 'show_help'
     }
   end
 
-  def find_method(type)
-    if key_exists?(type)
-      keys.select do |cmds|
-        cmds.chars.first == type
+  def find_method(command)
+    if cmd_exists?(command)
+      cmds.select do |cmd|
+        cmd.chars.first == command
       end.first.to_sym
     end
   end
 
-  def key_exists?(type)
-    keys.map(&:chr).include?(type)
+  def cmd_exists?(type)
+    cmds.map(&:chr).include?(type)
   end
 
-  def keys
-    commands_mapping.keys.map(&:to_s)
+  def cmds
+    cmds_mapping.keys.map(&:to_s)
   end
 end
