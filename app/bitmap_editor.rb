@@ -29,22 +29,27 @@ class BitmapEditor
   end
 
   def draw_pixel(x, y, c)
+    validate_bitmap!
     @bitmap.paint_pixel(x.to_i, y.to_i, c)
   end
 
   def draw_vertical(x, y1, y2, c)
+    validate_bitmap!
     @bitmap.paint_column(x.to_i, y1.to_i, y2.to_i, c)
   end
 
   def draw_horizontal(x1, x2, y, c)
+    validate_bitmap!
     @bitmap.paint_row(y.to_i, x1.to_i, x2.to_i, c)
   end
 
   def print_bitmat
+    validate_bitmap!
     @bitmap.print
   end
 
   def clear_bitmap
+    validate_bitmap!
     @bitmap.clear_image
   end
 
@@ -75,6 +80,10 @@ X - Terminate the session"
       'X': 'exit_console',
       '?': 'show_help'
     }
+  end
+
+  def validate_bitmap!
+    fail ArgumentError, "Bitmap does not exist" unless @bitmap
   end
 
   def find_method(command)

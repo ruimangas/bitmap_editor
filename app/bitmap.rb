@@ -41,6 +41,7 @@ class Bitmap
   private
 
   def paint(pixel, color)
+    validate(pixel)
     x = pixel.x - 1
     y = pixel.y - 1
     @image[y][x] = color
@@ -53,12 +54,16 @@ class Bitmap
   end
 
   def column(x, y1, y2)
+    validate_line(y1, y2)
+
     (y1..y2).map do |y|
       Pixel.new(x, y)
     end
   end
 
   def row(y, x1, x2)
+    validate_line(x1, x2)
+
     (x1..x2).map do |x|
       Pixel.new(x, y)
     end
@@ -66,5 +71,15 @@ class Bitmap
 
   def build_bitmap
     Array.new(@height) { Array.new(@width, WHITE) }
+  end
+
+  def validate(pixel)
+    if pixel.x > @width || pixel.y > @height
+      fail ArgumentError, 'Pixel position is not valid'
+    end
+  end
+
+  def validate_line(p1, p2)
+    fail ArgumentError, 'Invalid line' if p1 > p2
   end
 end

@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe Bitmap do
-  before { 
+  before {
     @bitmap = Bitmap.new(5,5)
   }
 
@@ -118,6 +118,74 @@ describe Bitmap do
       ]
 
       expect(subject.print).to eq(expected_bitmap)
+    end
+  end
+
+  describe 'Invalid pixel positions' do
+    describe 'paint pixel' do
+      it 'y is invalid' do
+        expect{
+          subject.paint_pixel(5, 7, 'Y')
+        }.to raise_error(ArgumentError)
+      end
+
+      it 'x is invalid' do
+        expect{
+          subject.paint_pixel(10, 5, 'Y')
+        }.to raise_error(ArgumentError)
+      end
+    end
+
+    describe 'paint column' do
+      it 'x is invalid' do
+        expect{
+          subject.paint_column(10, 1, 4, 'Y')
+        }.to raise_error(ArgumentError)
+      end
+
+      it 'y2 is invalid' do
+        expect{
+          subject.paint_column(5, 1, 8, 'Y')
+        }.to raise_error(ArgumentError)
+      end
+
+      it 'y1 is invalid' do
+        expect{
+          subject.paint_column(5, 6, 5, 'Y')
+        }.to raise_error(ArgumentError)
+      end
+
+      it 'y1 and y2 are invalid' do
+        expect{
+          subject.paint_column(5, 6, 10, 'Y')
+        }.to raise_error(ArgumentError)
+      end
+    end
+
+    describe 'paint row' do
+      it 'y is invalid' do
+        expect{
+          subject.paint_row(10, 1, 4, 'Y')
+        }.to raise_error(ArgumentError)
+      end
+
+      it 'x2 is invalid' do
+        expect{
+          subject.paint_row(5, 1, 8, 'Y')
+        }.to raise_error(ArgumentError)
+      end
+
+      it 'x1 is invalid' do
+        expect{
+          subject.paint_row(5, 6, 5, 'Y')
+        }.to raise_error(ArgumentError)
+      end
+
+      it 'x1 and x2 are invalid' do
+        expect{
+          subject.paint_row(5, 6, 10, 'Y')
+        }.to raise_error(ArgumentError)
+      end
     end
   end
 end
