@@ -80,18 +80,16 @@ X - Terminate the session"
   def find_method(type)
     if key_exists?(type)
       keys.select do |cmds|
-        cmds.first == type
-      end.first.join(' ').to_sym
+        cmds.chars.first == type
+      end.first.to_sym
     end
   end
 
   def key_exists?(type)
-    keys.map(&:first).include?(type)
+    keys.map(&:chr).include?(type)
   end
 
   def keys
-    commands_mapping.keys \
-      .map(&:to_s)
-      .map(&:split)
+    commands_mapping.keys.map(&:to_s)
   end
 end
