@@ -1,4 +1,6 @@
 class BitmapEditor
+  attr_accessor :bitmap
+
   def run
     @running = true
     puts 'type ? for help'
@@ -23,21 +25,27 @@ class BitmapEditor
   end
 
   def create_bitmap(width, height)
+    @bitmap = Bitmap.new(width.to_i, height.to_i)
   end
 
   def draw_pixel(x, y, c)
+    @bitmap.colorize(x.to_i, y.to_i, c)
   end
 
   def draw_vertical(x, y1, y2, c)
+    @bitmap.paint_column(x.to_i, y1.to_i, y2.to_i, c)
   end
 
   def draw_horizontal(x1, x2, y, c)
+    @bitmap.paint_row(y.to_i, x1.to_i, x2.to_i, c)
   end
 
   def print_bitmat
+    @bitmap.print
   end
 
   def clear_table
+    @bitmap.clear_image
   end
 
   def exit_console
@@ -63,7 +71,7 @@ X - Terminate the session"
       'V X Y1 Y2 C': 'draw_vertical',
       'H X1 X2 Y C': 'draw_horizontal',
       'C': 'clear_table',
-      'S': 'print',
+      'S': 'print_bitmat',
       'X': 'exit_console',
       '?': 'show_help'
     }
@@ -77,7 +85,7 @@ X - Terminate the session"
     end
   end
 
-  def key_exists?(key)
+  def key_exists?(type)
     keys.map(&:first).include?(type)
   end
 
