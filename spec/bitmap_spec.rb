@@ -8,6 +8,7 @@ describe Bitmap do
   subject { @bitmap }
 
   describe 'bitmap creating' do
+
     it 'should return a 5X5 bitmap' do
       expected_bitmap = [
         [0, 0, 0, 0, 0],
@@ -34,6 +35,7 @@ describe Bitmap do
   end
 
   describe 'colorization of a pixel' do
+
     before do
       subject.paint_pixel(2, 3, 'R')
     end
@@ -68,6 +70,7 @@ describe Bitmap do
   end
 
   describe 'paint a horizontal line' do
+
     before do
       subject.paint_row(2, 1, 5, 'R')
     end
@@ -87,6 +90,7 @@ describe Bitmap do
   end
 
   describe 'paint a vertical line' do
+
     before do
       subject.paint_column(2, 1, 5, 'Y')
     end
@@ -106,6 +110,7 @@ describe Bitmap do
   end
 
   describe 'bitmap clear' do
+
     it 'should clear the bitmap' do
       subject.clear_image
 
@@ -122,6 +127,7 @@ describe Bitmap do
   end
 
   describe 'Invalid pixel positions' do
+
     describe 'paint pixel' do
       it 'y is invalid' do
         expect{
@@ -137,6 +143,7 @@ describe Bitmap do
     end
 
     describe 'paint column' do
+
       it 'x is invalid' do
         expect{
           subject.paint_column(10, 1, 4, 'Y')
@@ -163,6 +170,7 @@ describe Bitmap do
     end
 
     describe 'paint row' do
+
       it 'y is invalid' do
         expect{
           subject.paint_row(10, 1, 4, 'Y')

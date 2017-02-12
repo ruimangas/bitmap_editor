@@ -20,7 +20,7 @@ class BitmapEditor
       method = cmds_mapping.fetch(m)
       send(method, *params)
     else
-      puts 'unrecognised command :('
+      puts 'unrecognised command'
     end
   end
 
