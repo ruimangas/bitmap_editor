@@ -17,7 +17,15 @@ describe BitmapEditor do
       }.to output(/goodbye/).to_stdout
     end
 
-    it 'should not recognise known input' do
+    it 'should return help menu' do
+      help_text = @editor.send(:show_help)
+
+      expect{
+        @editor.send(:parse, '?')
+      }.to output(help_text).to_stdout
+    end
+
+    it 'should not recognise input' do
       expect{
         @editor.send(:parse, 'alice')
       }.to output(/unrecognised command/).to_stdout
@@ -48,12 +56,12 @@ describe BitmapEditor do
           @editor.send(:parse, 'V 1 1 2 Y')
         }.to raise_error("Bitmap does not exist")
       end
-    end
 
-    it 'should an error: bitmap not created yet' do
-      expect{
-        @editor.send(:parse, 'L 1 1 R')
-      }.to raise_error("Bitmap does not exist")
+      it 'should an error: bitmap not created yet' do
+        expect{
+          @editor.send(:parse, 'L 1 1 R')
+        }.to raise_error("Bitmap does not exist")
+      end
     end
 
     describe 'create and paint bitmap' do
