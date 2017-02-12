@@ -37,6 +37,24 @@ describe BitmapEditor do
       }.to raise_error("Bitmap does not exist")
     end
 
+    it 'should create a 999X999 bitmapt' do
+      expect{
+        @editor.send(:parse, 'I 999 999')
+      }.to_not output.to_stdout
+    end
+
+    it 'should create a 20X20 bitmapt' do
+      expect{
+        @editor.send(:parse, 'I 20 20')
+      }.to_not output.to_stdout
+    end
+
+    it 'should create a 5X5 bitmapt' do
+      expect{
+        @editor.send(:parse, 'I 5 5')
+      }.to_not output.to_stdout
+    end
+
     describe 'unrecognised commands errors' do
       it 'should an error: unrecognised command' do
         expect{
