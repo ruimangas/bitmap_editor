@@ -74,7 +74,7 @@ class Bitmap
   end
 
   def validate(pixel)
-    if pixel.x > @width || pixel.y > @height
+    unless pixel.x.between?(1, @width) && pixel.y.between?(1, @height)
       fail ArgumentError, 'Pixel position is not valid'
     end
   end
