@@ -15,9 +15,8 @@ class BitmapEditor
 
   def parse(input)
     cmd, *params = input.split
-    m = find_method(cmd)
-    if cmds_mapping.key?(m)
-      method = cmds_mapping.fetch(m)
+    if cmds_mapping.key?(cmd)
+      method = cmds_mapping.fetch(cmd)
       send(method, *params)
     else
       puts 'unrecognised command'
@@ -71,34 +70,18 @@ X - Terminate the session"
 
   def cmds_mapping
     {
-      'I M N': 'create_bitmap' ,
-      'L X Y C': 'draw_pixel',
-      'V X Y1 Y2 C': 'draw_vertical',
-      'H X1 X2 Y C': 'draw_horizontal',
-      'C': 'clear_bitmap',
-      'S': 'print_bitmat',
-      'X': 'exit_console',
-      '?': 'show_help'
+      'I' => 'create_bitmap' ,
+      'L' => 'draw_pixel',
+      'V' => 'draw_vertical',
+      'H' => 'draw_horizontal',
+      'C' => 'clear_bitmap',
+      'S' => 'print_bitmat',
+      'X' => 'exit_console',
+      '?' => 'show_help'
     }
   end
 
   def validate_bitmap!
     fail ArgumentError, "Bitmap does not exist" unless @bitmap
-  end
-
-  def find_method(command)
-    if cmd_exists?(command)
-      cmds.select do |cmd|
-        cmd.chars.first == command
-      end.first.to_sym
-    end
-  end
-
-  def cmd_exists?(type)
-    cmds.map(&:chr).include?(type)
-  end
-
-  def cmds
-    cmds_mapping.keys.map(&:to_s)
   end
 end
