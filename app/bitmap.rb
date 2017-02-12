@@ -1,8 +1,8 @@
-require_relative 'colors'
+require_relative 'helpers'
 require_relative 'pixel'
 
 class Bitmap
-  include Colors
+  include Helpers::Colors
 
   attr_reader :width, :height, :image
   attr_writer :image

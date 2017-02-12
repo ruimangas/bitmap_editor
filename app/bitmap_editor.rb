@@ -1,4 +1,8 @@
+require_relative 'helpers'
+
 class BitmapEditor
+  include Helpers::Validations
+
   attr_accessor :bitmap
 
   def run
@@ -15,7 +19,7 @@ class BitmapEditor
 
   def parse(input)
     cmd, *params = input.split
-    if cmds_mapping.key?(cmd)
+    if cmds_mapping.key?(cmd) && valid?(cmd, input)
       method = cmds_mapping.fetch(cmd)
       send(method, *params)
     else
@@ -79,6 +83,12 @@ X - Terminate the session"
       'X' => 'exit_console',
       '?' => 'show_help'
     }
+  end
+
+  def valid?(cmd, input)
+    rule = RULES.fetch(cmd)
+    reg_exp = Regexp.new(rule)
+    !!(input =~ reg_exp)
   end
 
   def validate_bitmap!

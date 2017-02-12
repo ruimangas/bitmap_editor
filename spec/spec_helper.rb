@@ -1,4 +1,4 @@
-require_relative '../app/colors'
+require_relative '../app/helpers'
 require_relative '../app/pixel'
 require_relative '../app/bitmap'
 require_relative '../app/bitmap_editor'
