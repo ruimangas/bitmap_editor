@@ -37,6 +37,56 @@ describe BitmapEditor do
       }.to raise_error("Bitmap does not exist")
     end
 
+    describe 'unrecognised commands errors' do
+      it 'should an error: unrecognised command' do
+        expect{
+          @editor.send(:parse, 'C 2')
+        }.to output(/unrecognised command/).to_stdout
+      end
+
+      it 'should an error: unrecognised command' do
+        expect{
+          @editor.send(:parse, '? 2')
+        }.to output(/unrecognised command/).to_stdout
+      end
+
+      it 'should an error: unrecognised command' do
+        expect{
+          @editor.send(:parse, 'I 2 R')
+        }.to output(/unrecognised command/).to_stdout
+      end
+
+      it 'should an error: unrecognised command' do
+        expect{
+          @editor.send(:parse, 'L 2 R')
+        }.to output(/unrecognised command/).to_stdout
+      end
+
+      it 'should an error: unrecognised command' do
+        expect{
+          @editor.send(:parse, 'L 2 2 2')
+        }.to output(/unrecognised command/).to_stdout
+      end
+
+      it 'should an error: unrecognised command' do
+        expect{
+          @editor.send(:parse, 'H 2 2 2 2')
+        }.to output(/unrecognised command/).to_stdout
+      end
+
+      it 'should an error: unrecognised command' do
+        expect{
+          @editor.send(:parse, 'V 2 2 2 2')
+        }.to output(/unrecognised command/).to_stdout
+      end
+
+      it 'should an error: unrecognised command' do
+        expect{
+          @editor.send(:parse, 'X 2')
+        }.to output(/unrecognised command/).to_stdout
+      end
+    end
+
     describe 'errors while trying to colorize' do
 
       it 'should an error: bitmap not created yet' do
