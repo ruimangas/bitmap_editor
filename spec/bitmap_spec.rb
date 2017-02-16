@@ -11,11 +11,11 @@ describe Bitmap do
 
     it 'should return a 5X5 bitmap' do
       expected_bitmap = [
-        [0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0]
+        ['O', 'O', 'O', 'O', 'O'],
+        ['O', 'O', 'O', 'O', 'O'],
+        ['O', 'O', 'O', 'O', 'O'],
+        ['O', 'O', 'O', 'O', 'O'],
+        ['O', 'O', 'O', 'O', 'O']
       ]
 
       expect(subject.print).to eq(expected_bitmap)
@@ -25,9 +25,9 @@ describe Bitmap do
       bitmap = Bitmap.new(2,3)
 
       expected_bitmap = [
-        [0, 0],
-        [0, 0],
-        [0, 0]
+        ['O', 'O'],
+        ['O', 'O'],
+        ['O', 'O']
       ]
 
       expect(bitmap.print).to eq(expected_bitmap)
@@ -43,11 +43,11 @@ describe Bitmap do
     it 'should paint the (2,3) pixel with red' do
       c = 'R'
       expected_bitmap = [
-        [0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0],
-        [0, c, 0, 0, 0],
-        [0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0]
+        ['O', 'O', 'O', 'O', 'O'],
+        ['O', 'O', 'O', 'O', 'O'],
+        ['O', c,   'O', 'O', 'O'],
+        ['O', 'O', 'O', 'O', 'O'],
+        ['O', 'O', 'O', 'O', 'O']
       ]
 
       expect(subject.print).to eq(expected_bitmap)
@@ -58,11 +58,11 @@ describe Bitmap do
       subject.paint_pixel(5, 5, c)
 
       expected_bitmap = [
-        [0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0],
-        [0, c, 0, 0, 0],
-        [0, 0, 0, 0, 0],
-        [0, 0, 0, 0, c]
+        ['O', 'O', 'O', 'O', 'O'],
+        ['O', 'O', 'O', 'O', 'O'],
+        ['O',  c,  'O', 'O', 'O'],
+        ['O', 'O', 'O', 'O', 'O'],
+        ['O', 'O', 'O', 'O',  c]
       ]
 
       expect(subject.print).to eq(expected_bitmap)
@@ -78,11 +78,11 @@ describe Bitmap do
     it 'should paint the second row with red' do
       c = 'R'
       expected_bitmap = [
-        [0, 0, 0, 0, 0],
-        [c, c, c, c, c],
-        [0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0]
+        ['O', 'O', 'O', 'O', 'O'],
+        [ c,   c,   c,   c,   c ],
+        ['O', 'O', 'O', 'O', 'O'],
+        ['O', 'O', 'O', 'O', 'O'],
+        ['O', 'O', 'O', 'O', 'O']
       ]
 
       expect(subject.print).to eq(expected_bitmap)
@@ -98,11 +98,11 @@ describe Bitmap do
     it 'should paint the second column with yellow' do
       c = 'Y'
       expected_bitmap = [
-        [0, c, 0, 0, 0],
-        [0, c, 0, 0, 0],
-        [0, c, 0, 0, 0],
-        [0, c, 0, 0, 0],
-        [0, c, 0, 0, 0]
+        ['O', c, 'O', 'O', 'O'],
+        ['O', c, 'O', 'O', 'O'],
+        ['O', c, 'O', 'O', 'O'],
+        ['O', c, 'O', 'O', 'O'],
+        ['O', c, 'O', 'O', 'O']
       ]
 
       expect(subject.print).to eq(expected_bitmap)
@@ -115,11 +115,11 @@ describe Bitmap do
       subject.clear_image
 
       expected_bitmap = [
-        [0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0]
+        ['O', 'O', 'O', 'O', 'O'],
+        ['O', 'O', 'O', 'O', 'O'],
+        ['O', 'O', 'O', 'O', 'O'],
+        ['O', 'O', 'O', 'O', 'O'],
+        ['O', 'O', 'O', 'O', 'O']
       ]
 
       expect(subject.print).to eq(expected_bitmap)

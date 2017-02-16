@@ -1,7 +1,7 @@
 module Helpers
 
   module Colors
-    WHITE = 0
+    WHITE = 'O'
     GREEN = 'G'
     RED = 'R'
   end
