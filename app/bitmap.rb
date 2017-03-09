@@ -34,6 +34,22 @@ class Bitmap
     paint_line(pixels, color)
   end
 
+  def draw_bucket(x, y, color, new_color, looked_neighbours = [])
+    unseen_neighbours = neighbours_of(x, y).reject do |neighbour|
+      looked_neighbours.include?(neighbour)
+    end
+
+    paint_unseen = unseen_neighbours.select { |y, x| @image[y][x] == color }.each do |y, x|
+      @image[y][x] = new_color
+    end
+
+    looked_neighbours += paint_unseen
+
+    paint_unseen.map do |y, x|
+      draw_bucket(x, y, color, new_color, looked_neighbours)
+    end
+  end
+
   def clear_image
     @image = build_bitmap
   end
@@ -67,6 +83,24 @@ class Bitmap
     (x1..x2).map do |x|
       Pixel.new(x, y)
     end
+  end
+
+  def neighbours_of(x, y)
+    neighbours = Array.new
+
+    [y-1, y+1].each do |row|
+      if row.between?(1, @height)
+        neighbours << [row, x]
+      end
+    end
+
+    [x-1, x+1].each do |column|
+      if column.between?(1, @width)
+        neighbours << [y, column]
+      end
+    end
+
+    neighbours
   end
 
   def build_bitmap

@@ -46,6 +46,12 @@ class BitmapEditor
     @bitmap.paint_row(y.to_i, x1.to_i, x2.to_i, c)
   end
 
+  def fill_bucket(x, y, new_color)
+    validate_bitmap!
+    old_color = @bitmap.image[y.to_i][x.to_i]
+    @bitmap.draw_bucket(x.to_i, y.to_i, old_color, new_color)
+  end
+
   def print_bitmat
     validate_bitmap!
     @bitmap.print
@@ -76,6 +82,7 @@ X - Terminate the session"
     {
       'I' => 'create_bitmap' ,
       'L' => 'draw_pixel',
+      'F' => 'fill_bucket',
       'V' => 'draw_vertical',
       'H' => 'draw_horizontal',
       'C' => 'clear_bitmap',
