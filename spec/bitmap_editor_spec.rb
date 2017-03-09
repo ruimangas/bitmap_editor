@@ -141,7 +141,7 @@ describe BitmapEditor do
       it 'should print the bitmap' do
         expect{
           @editor.send(:parse, 'S')
-        }.to output("0 0\n0 0\n").to_stdout
+        }.to output("O O\nO O\n").to_stdout
       end
 
       it 'should paint the pixel (1,1)' do
@@ -149,7 +149,7 @@ describe BitmapEditor do
 
         expect{
           @editor.send(:parse, 'S')
-        }.to output("R 0\n0 0\n").to_stdout
+        }.to output("R O\nO O\n").to_stdout
       end
 
       it 'should paint the first row' do
@@ -157,7 +157,7 @@ describe BitmapEditor do
 
         expect{
           @editor.send(:parse, 'S')
-        }.to output("R R\n0 0\n").to_stdout
+        }.to output("R R\nO O\n").to_stdout
       end
 
       it 'should paint the second row' do
@@ -165,7 +165,7 @@ describe BitmapEditor do
 
         expect{
           @editor.send(:parse, 'S')
-        }.to output("0 0\nR R\n").to_stdout
+        }.to output("O O\nR R\n").to_stdout
       end
 
       it 'should paint the first column' do
@@ -173,7 +173,7 @@ describe BitmapEditor do
 
         expect{
           @editor.send(:parse, 'S')
-        }.to output("R 0\nR 0\n").to_stdout
+        }.to output("R O\nR O\n").to_stdout
       end
 
       it 'should paint the second column' do
@@ -181,7 +181,7 @@ describe BitmapEditor do
 
         expect{
           @editor.send(:parse, 'S')
-        }.to output("0 R\n0 R\n").to_stdout
+        }.to output("O R\nO R\n").to_stdout
       end
     end
 
@@ -194,14 +194,14 @@ describe BitmapEditor do
       it 'should have the (1,1) pixel painted' do
         expect{
           @editor.send(:parse, 'S')
-        }.to output("R 0\n0 0\n").to_stdout
+        }.to output("R O\nO O\n").to_stdout
       end
 
       it 'should clean the bitmap' do
         @editor.send(:parse, 'C')
         expect{
           @editor.send(:parse, 'S')
-        }.to output("0 0\n0 0\n").to_stdout
+        }.to output("O O\nO O\n").to_stdout
       end
     end
   end
