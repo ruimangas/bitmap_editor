@@ -39,8 +39,8 @@ class Bitmap
       looked_neighbours.include?(neighbour)
     end
 
-    paint_unseen = unseen_neighbours.select { |y, x| @image[y][x] == color }.each do |y, x|
-      @image[y][x] = new_color
+    paint_unseen = unseen_neighbours.select { |y, x| @image[y-1][x-1] == color }.each do |y, x|
+      @image[y-1][x-1] = new_color
     end
 
     looked_neighbours += paint_unseen

@@ -48,7 +48,7 @@ class BitmapEditor
 
   def fill_bucket(x, y, new_color)
     validate_bitmap!
-    old_color = @bitmap.image[y.to_i][x.to_i]
+    old_color = @bitmap.image[y.to_i - 1][x.to_i - 1]
     @bitmap.draw_bucket(x.to_i, y.to_i, old_color, new_color)
   end
 
@@ -74,6 +74,7 @@ C - Clears the table, setting all pixels to white (O).
 L X Y C - Colours the pixel (X,Y) with colour C.
 V X Y1 Y2 C - Draw a vertical segment of colour C in column X between rows Y1 and Y2 (inclusive).
 H X1 X2 Y C - Draw a horizontal segment of colour C in row Y between columns X1 and X2 (inclusive).
+F X Y C - It fills a bucket.
 S - Show the contents of the current image
 X - Terminate the session"
   end

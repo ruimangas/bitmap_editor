@@ -185,6 +185,81 @@ describe BitmapEditor do
       end
     end
 
+    describe 'fills a bucket on a 3X3 bitmap' do
+      before {
+        @editor.send(:parse, 'I 3 3')
+        @editor.send(:parse, 'H 1 3 2 A')
+        @editor.send(:parse, 'V 2 1 3 A')
+        @editor.send(:parse, 'F 2 2 B')
+      }
+
+      it 'should paint the bucket' do
+        expect{
+          @editor.send(:parse, 'S')
+        }.to output("O B O\nB B B\nO B O\n").to_stdout
+      end
+    end
+
+    describe 'fills a bucket on a 2X2 bitmap' do
+      before {
+        @editor.send(:parse, 'I 2 2')
+        @editor.send(:parse, 'H 1 2 1 A')
+        @editor.send(:parse, 'H 1 2 2 A')
+        @editor.send(:parse, 'F 1 1 B')
+      }
+
+      it 'should paint the bucket' do
+        expect{
+          @editor.send(:parse, 'S')
+        }.to output("B B\nB B\n").to_stdout
+      end
+    end
+
+    describe 'fills a bucket on a 5X5 bitmap' do
+      before {
+        @editor.send(:parse, 'I 5 5')
+        @editor.send(:parse, 'H 1 5 2 A')
+        @editor.send(:parse, 'H 1 5 3 A')
+        @editor.send(:parse, 'F 2 2 B')
+      }
+
+      it 'should paint the bucket' do
+        expect{
+          @editor.send(:parse, 'S')
+        }.to output("O O O O O\nB B B B B\nB B B B B\nO O O O O\nO O O O O\n").to_stdout
+      end
+    end
+
+    describe 'fills another bucket on a 5X5 bitmap' do
+      before {
+        @editor.send(:parse, 'I 5 5')
+        @editor.send(:parse, 'H 1 5 2 A')
+        @editor.send(:parse, 'H 1 5 3 A')
+        @editor.send(:parse, 'L 1 2 K')
+        @editor.send(:parse, 'F 2 2 B')
+      }
+
+      it 'should paint the bucket' do
+        expect{
+          @editor.send(:parse, 'S')
+        }.to output("O O O O O\nK B B B B\nB B B B B\nO O O O O\nO O O O O\n").to_stdout
+      end
+    end
+
+    describe 'fills another bucket on a 10X10 bitmap' do
+      before {
+        @editor.send(:parse, 'I 10 10')
+        @editor.send(:parse, 'H 1 10 1 K')
+        @editor.send(:parse, 'F 10 10 H')
+      }
+
+      it 'should paint the bucket' do
+        expect{
+          @editor.send(:parse, 'S')
+        }.to output("K K K K K K K K K K\nH H H H H H H H H H\nH H H H H H H H H H\nH H H H H H H H H H\nH H H H H H H H H H\nH H H H H H H H H H\nH H H H H H H H H H\nH H H H H H H H H H\nH H H H H H H H H H\nH H H H H H H H H H\n").to_stdout
+      end
+    end
+
     describe 'cleaning the bitmap' do
       before {
         @editor.send(:parse, 'I 2 2')
